@@ -195,7 +195,9 @@ void loop() {
     char inChar = Serial.read();
     if (inChar == '*') { // Clear string using '*' input
       txtMsg = "";
+      // erase the string so it doesnt print anything 
       fill_solid(leds, NUM_LEDS, CRGB::Black);
+      //set all the leds off
     }
     else if (inChar == '/') { // Clear string using '*' input
       pride();
@@ -223,6 +225,7 @@ void loop() {
   //blinkBlink();
   printChar(txtMsg);
 }
+
 void pride()
 {
   static uint16_t sPseudotime = 0;
