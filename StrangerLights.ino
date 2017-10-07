@@ -1,7 +1,5 @@
-// Converted to FastLED from Neopixel.
-// original from https://create.arduino.cc/projecthub/3Derp/programmable-stranger-things-light-wall-costume-eaa668
-// original code by Michael Barretta
-// FastLED version by Zombo
+/* Prototype for haloween costume 2016, read input string from serial and perfrom action character by character with delay */
+// Built from StringLength Arduino example and Adafruit StrandTest example
 
 #include <FastLED.h>
 #define DATA_PIN 3
@@ -12,7 +10,7 @@
 #define NUM_LEDS 60
 
 
-String txtMsg = "hey 123";    // Initialize default string for incoming text
+String txtMsg = "FASTled";    // Initialize default string for incoming text
 CRGB leds[NUM_LEDS];
 
 // Array to transpose incoming ascii positions to corresponding positions in light fixture
@@ -62,6 +60,7 @@ const int numPos[11] {
 };
 
 void setup() {
+  
   FastLED.addLeds<WS2811, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS); //setting up the FastLED
   FastLED.clear();
 
@@ -75,6 +74,7 @@ void setup() {
 
 // Program to step through string character by character and perform an action
 void printChar(String input) {
+  txtMsg.toLowerCase();
   for (int i = 0; i < input.length(); i++) {
 
 
