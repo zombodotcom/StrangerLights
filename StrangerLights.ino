@@ -12,7 +12,7 @@
 #define NUM_LEDS 60
 
 
-String txtMsg = "FASTled";    // Initialize default string for incoming text
+String txtMsg = "hey 123";    // Initialize default string for incoming text
 CRGB leds[NUM_LEDS];
 
 // Array to transpose incoming ascii positions to corresponding positions in light fixture
@@ -46,6 +46,7 @@ const int charPos[36] {
 
 
 };
+// number array 
 const int numPos[11] {
   32,//0
   33,//1
@@ -62,7 +63,6 @@ const int numPos[11] {
 };
 
 void setup() {
-  
   FastLED.addLeds<WS2811, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS); //setting up the FastLED
   FastLED.clear();
 
@@ -76,21 +76,21 @@ void setup() {
 
 // Program to step through string character by character and perform an action
 void printChar(String input) {
- 
+  
   for (int i = 0; i < input.length(); i++) {
-
-
+    //find the value of the character
     int let = ((int)input[i]);
 
+    //if it is a space , go to the space position of the LEDS in this first draft it is in the numPos Array at 10  
     if (let == 32) {
-    leds[numPos[10]] = CHSV(random8(), 255, 255);
+    leds[numPos[10]] = CHSV(random8(), 255, 255); // chsv random 8 makes it a random color each time
       FastLED.show();
       delay(ONDELAY);
-      leds[numPos[10]] = CRGB::Black;
+      leds[numPos[10]] = CRGB::Black; // turn the space led off
       FastLED.show();
       delay(OFFDELAY);
     }
-
+  // check to see if it is a letter if it is use the charPos array for the led
     if (let >= 97 && let <= 122) {
     int let1 = let - 97;
     leds[charPos[let1]] = CHSV(random8(), 255, 255);
@@ -101,6 +101,7 @@ void printChar(String input) {
       FastLED.show();
       delay(OFFDELAY);
     }
+    //check to see if it is a number, if it is use the numpos array for the led
     if (let >= 48 && let <= 57) {
     int numa = let - 48;
     leds[numPos[numa]] = CHSV(random8(), 255, 255);
@@ -188,7 +189,6 @@ void blinkRow(int speed) {
 
 // Main program body, loop checks for new serial input and runs functions based on character input or default print function
 void loop() {
-   txtMsg.toLowerCase();
   // Set string to incoming text
   while (Serial.available() > 0) {
     delay(10);
