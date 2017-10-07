@@ -1,5 +1,7 @@
-/* Prototype for haloween costume 2016, read input string from serial and perfrom action character by character with delay */
-// Built from StringLength Arduino example and Adafruit StrandTest example
+// Converted to FastLED from Neopixel.
+// original from https://create.arduino.cc/projecthub/3Derp/programmable-stranger-things-light-wall-costume-eaa668
+// original code by Michael Barretta
+// FastLED version by Zombo
 
 #include <FastLED.h>
 #define DATA_PIN 3
