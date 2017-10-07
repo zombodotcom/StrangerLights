@@ -1,6 +1,7 @@
 //original neopixels version https://create.arduino.cc/projecthub/3Derp/programmable-stranger-things-light-wall-costume-eaa668
 // original code by Michael Barretta
-//Edited for FastLED and Adding Numbers and Optimized: Zombodotcom
+//Edited for FastLED, Optimized and Added Numbers.
+//Created by Zombodotcom
 
 #include <FastLED.h>
 #define DATA_PIN 3
