@@ -1,1 +1,2 @@
-hello
+For Halloween this year I am going as Dr. Stranger Things.
+I found a version of one built using the Neopixels Library, I edited it for FastLED Added numbers and a space location. To edit it you just need to setup where each number/letter is on your LED strip. Just connect your BLE or Bluetooth chip to the arduino and connect to it through a bluetooth serial app, and send your message you want displayed. 
