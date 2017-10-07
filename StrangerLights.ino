@@ -74,7 +74,7 @@ void setup() {
 
 // Program to step through string character by character and perform an action
 void printChar(String input) {
-  txtMsg.toLowerCase();
+ 
   for (int i = 0; i < input.length(); i++) {
 
 
@@ -186,6 +186,7 @@ void blinkRow(int speed) {
 
 // Main program body, loop checks for new serial input and runs functions based on character input or default print function
 void loop() {
+   txtMsg.toLowerCase();
   // Set string to incoming text
   while (Serial.available() > 0) {
     delay(10);
