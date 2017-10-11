@@ -12,7 +12,7 @@
 #define NUM_LEDS 60
 
 
-String txtMsg = "hey 123";    // Initialize default string for incoming text
+String txtMsg = "/";    // Initialize default string for incoming text
 CRGB leds[NUM_LEDS];
 
 // Array to transpose incoming ascii positions to corresponding positions in light fixture
@@ -63,15 +63,14 @@ const int numPos[11] {
 };
 
 void setup() {
-  FastLED.addLeds<WS2811, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS); //setting up the FastLED
+  FastLED.addLeds<WS2812B, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS); //setting up the FastLED
   FastLED.clear();
-
+  FastLED.show();
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
-  FastLED.show();
 }
 
 // Program to step through string character by character and perform an action
@@ -189,18 +188,22 @@ void blinkRow(int speed) {
 
 // Main program body, loop checks for new serial input and runs functions based on character input or default print function
 void loop() {
-  // Set string to incoming text
+//   Set string to incoming text
+   delay(10);
+   FastLED.show();
   while (Serial.available() > 0) {
-    delay(10);
+    delay(50);
     char inChar = Serial.read();
     if (inChar == '*') { // Clear string using '*' input
+      fill_solid(leds, NUM_LEDS, CRGB::Black);
       txtMsg = "";
       // erase the string so it doesnt print anything 
-      fill_solid(leds, NUM_LEDS, CRGB::Black);
+     
       //set all the leds off
     }
     else if (inChar == '/') { // Clear string using '*' input
-      pride();
+     pride();
+    FastLED.show();
     }
     else if (inChar == '%') { // Run other functions using specified inputs
       blinkConst();
@@ -217,6 +220,7 @@ void loop() {
     else if (inChar == '#') { // Run other functions using specified inputs
       blinkRow(50);
     }
+    else if (
     else {  // Other wise add input serial character to cleared string
       txtMsg += inChar;
     }
@@ -224,10 +228,12 @@ void loop() {
 
   //blinkBlink();
   printChar(txtMsg);
+
 }
 
 void pride()
 {
+
   static uint16_t sPseudotime = 0;
   static uint16_t sLastMillis = 0;
   static uint16_t sHue16 = 0;
@@ -248,6 +254,7 @@ void pride()
   uint16_t brightnesstheta16 = sPseudotime;
 
   for ( uint16_t i = 0 ; i < NUM_LEDS; i++) {
+
     hue16 += hueinc16;
     uint8_t hue8 = hue16 / 256;
 
@@ -264,5 +271,7 @@ void pride()
     pixelnumber = (NUM_LEDS - 1) - pixelnumber;
 
     nblend( leds[pixelnumber], newcolor, 64);
+
   }
+
 }
