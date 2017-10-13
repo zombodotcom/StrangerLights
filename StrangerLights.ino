@@ -10,6 +10,7 @@
 #define ONDELAY 750
 #define OFFDELAY 500
 #define NUM_LEDS 60
+int mode=0;
 
 
 String txtMsg = "/";    // Initialize default string for incoming text
@@ -198,12 +199,14 @@ void loop() {
       fill_solid(leds, NUM_LEDS, CRGB::Black);
       txtMsg = "";
       // erase the string so it doesnt print anything 
-     
       //set all the leds off
     }
     else if (inChar == '/') { // Clear string using '*' input
-     pride();
-    FastLED.show();
+    mode=1;
+    }
+    else if (inChar == ':') { // set the mode to zero and turn all the leds off 
+    mode=0; // set the mode to zero and turn all the leds off 
+    fill_solid(leds, NUM_LEDS, CRGB::Black);
     }
     else if (inChar == '%') { // Run other functions using specified inputs
       blinkConst();
@@ -220,16 +223,28 @@ void loop() {
     else if (inChar == '#') { // Run other functions using specified inputs
       blinkRow(50);
     }
-    else if (
     else {  // Other wise add input serial character to cleared string
       txtMsg += inChar;
     }
   }
-
+  switch (mode) {
+    case 1:  //run when var = 1
+      pride();
+      FastLED.show();
+      break;
+    case 2:  //run when var = 2
+      blinkConst();
+      break;
+    default: 
+      // if nothing else matches, do the default
+      // default is optional
+    break;
+  }
   //blinkBlink();
   printChar(txtMsg);
-
+  
 }
+
 
 void pride()
 {
